@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import ScoreCircle from './ScoreCirlce';
 
 const ResumeCard = ({
-	resume: { id, companyName, jobTitle, feedback, imagePath },
+	resumes: { id, companyName, jobTitle, feedback, imagePath },
 }: {
 	resumes: Resume;
 }) => {
