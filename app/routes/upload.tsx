@@ -1,5 +1,5 @@
-import { useEffect, useState, type FormEvent } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router';
 import FileUploader from '~/components/FileUploader';
 import Navbar from '~/components/navbar';
 import { usePuterStore } from '~/lib/puter';
@@ -68,6 +68,8 @@ export default function Upload() {
 		data.feedback = JSON.parse(feedbackText);
 		await kv.set(`Resume ${uuid}`, JSON.stringify(data));
 		setStatusText('Analyze complite, redirecting...');
+		console.log(data);
+		navigate(`/resume/${uuid}`);
 	};
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -78,12 +80,6 @@ export default function Upload() {
 		const companyName = formData.get('company-name') as string;
 		const jobTitle = formData.get('job-title') as string;
 		const jobDescription = formData.get('job-description') as string;
-		console.log({
-			companyName,
-			jobTitle,
-			jobDescription,
-			file,
-		});
 
 		if (!file) return;
 		handleAnalyze({ companyName, jobTitle, jobDescription, file });
